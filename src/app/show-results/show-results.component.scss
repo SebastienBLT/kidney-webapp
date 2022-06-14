@@ -1,0 +1,46 @@
+/*@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Light.ttf");
+}
+*/
+.res-circle {
+
+  width: 42px;
+  border-radius: 50%;
+  border:2px solid;
+
+
+
+
+  line-height: 0;
+  position: relative;
+}
+
+.res-circle::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+
+.circle-txt {
+
+  position: absolute;
+  bottom: 50%;
+  width: 100%;
+  text-align: center;
+
+  font-family: arial, sans-serif;
+  font-weight: bold;
+}
+
+mat-expansion-panel{
+  padding: 10px;
+}
+mat-expansion-panel-header{
+  padding: 15px;
+}
+
+mat-list-item{
+  padding: 2%;
+}
