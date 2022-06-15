@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // @ts-ignore
-import results from '../results.json';
+import results from '../../../../kidney/results.json';
 
 @Component({
   selector: 'app-show-results',
