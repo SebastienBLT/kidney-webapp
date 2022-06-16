@@ -26,6 +26,8 @@ export class ShowResultsComponent implements OnInit {
     console.log(this.selectedInstance);
 
     console.log(this.selectedInstance.solution.chains.length);
+    console.log(this.selectedInstance.instance.altruists.length);
+    console.log(this.selectedInstance.instance.pairs.length);
 
   }
 

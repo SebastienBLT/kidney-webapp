@@ -110,7 +110,14 @@
         </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel class="solution-info">
+
+    <mat-card *ngIf="!selectedInstance.solution.cycles.length" style="background-color: dimgrey">
+      <mat-list>
+        <h4>Cycles de la solution</h4>
+        <mat-list-item style="color: #fa9a9a;">Aucun cycle généré</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-expansion-panel *ngIf="selectedInstance.solution.cycles.length" class="solution-info">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Cycles de la solution
@@ -192,7 +199,14 @@
         </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel class="solution-info" *ngIf="selectedInstance">
+
+    <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" style="background-color: dimgrey">
+      <mat-list>
+        <h4>Les Pairs/Altruists non-utilisés</h4>
+        <mat-list-item style="color: #fa9a9a;">Tous les pairs et altruistes on été utilisés</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-expansion-panel class="solution-info" *ngIf="selectedInstance && !((selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0))">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Les Pairs/Altruists non-utilisés
