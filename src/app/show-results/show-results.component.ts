@@ -24,11 +24,6 @@ export class ShowResultsComponent implements OnInit {
     this.selectedInstance = this.jsonResults.results[idItemSelected];
 
     console.log(this.selectedInstance);
-
-    console.log(this.selectedInstance.solution.chains.length);
-    console.log(this.selectedInstance.instance.altruists.length);
-    console.log(this.selectedInstance.instance.pairs.length);
-
   }
 
   checkIsInSolution(itemId: any){

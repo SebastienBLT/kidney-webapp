@@ -44,24 +44,10 @@
   <mat-accordion class="example-headers-align" multi>
 
     <mat-card *ngIf="!selectedInstance.solution.chains.length" style="background-color: dimgrey">
-<!--      <mat-card-header>-->
-<!--        <mat-card-subtitle>-->
-<!--          Chaines de la solution-->
-<!--        </mat-card-subtitle>-->
-<!--        <mat-card-subtitle style="margin-left: 10px; color: #fa9a9a;">-->
-<!--          Aucune chaine générée-->
-<!--        </mat-card-subtitle>-->
-<!--      </mat-card-header>-->
       <mat-list>
         <h4>Chaines de la solution</h4>
         <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
       </mat-list>
-<!--      <mat-card-content>-->
-<!--        Chaines de la solution-->
-<!--      </mat-card-content>-->
-<!--      <mat-card-content style="margin-left: 10px; color: #fa9a9a;">-->
-<!--        Aucune chaine générée-->
-<!--      </mat-card-content>-->
     </mat-card>
     <mat-expansion-panel *ngIf="selectedInstance.solution.chains.length" class="solution-info">
       <mat-expansion-panel-header>
@@ -203,7 +189,7 @@
     <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" style="background-color: dimgrey">
       <mat-list>
         <h4>Les Pairs/Altruists non-utilisés</h4>
-        <mat-list-item style="color: #fa9a9a;">Tous les pairs et altruistes on été utilisés</mat-list-item>
+        <mat-list-item style="color: #9afaa7;">Tous les pairs et altruistes on été utilisés</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-expansion-panel class="solution-info" *ngIf="selectedInstance && !((selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0))">
