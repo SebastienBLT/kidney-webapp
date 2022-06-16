@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // @ts-ignore
-import results from '../../../../kidney/results.json';
+import results from '../../../../oop-opti-kidney-swap/results.json';
 
 @Component({
   selector: 'app-show-results',
@@ -25,6 +25,8 @@ export class ShowResultsComponent implements OnInit {
 
     console.log(this.selectedInstance);
 
+    console.log(this.selectedInstance.solution.chains.length);
+
   }
 
   checkIsInSolution(itemId: any){
@@ -45,8 +47,6 @@ export class ShowResultsComponent implements OnInit {
     }
     return true;
   }
-
-
 
   getPourcentage(){
     let i=this.selectedInstance.instance.altruists.length+this.selectedInstance.instance.pairs.length;

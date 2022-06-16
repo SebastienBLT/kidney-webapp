@@ -27,10 +27,10 @@
 
 </mat-card>
 
-<mat-card style="border:1px solid blue;" *ngIf="selectedInstance">
+<mat-card id="solution" style="border:1px solid blue;" *ngIf="selectedInstance">
 
 
-  <mat-card>
+  <mat-card style="background-color: grey; margin-top: 10px; margin-bottom: 10px">
     <mat-list>
       <h4>Solution de l'instance</h4>
       <mat-list-item>Algorithme utilisé : {{selectedInstance.algorithm.name}}</mat-list-item>
@@ -41,9 +41,29 @@
       <mat-list-item>Pourcentage des pairs/altruists inutilisés : {{getPourcentage()}}%</mat-list-item>
     </mat-list>
   </mat-card>
-  <mat-accordion class="example-headers-align" multi >
+  <mat-accordion class="example-headers-align" multi>
 
-    <mat-expansion-panel>
+    <mat-card *ngIf="!selectedInstance.solution.chains.length" style="background-color: dimgrey">
+<!--      <mat-card-header>-->
+<!--        <mat-card-subtitle>-->
+<!--          Chaines de la solution-->
+<!--        </mat-card-subtitle>-->
+<!--        <mat-card-subtitle style="margin-left: 10px; color: #fa9a9a;">-->
+<!--          Aucune chaine générée-->
+<!--        </mat-card-subtitle>-->
+<!--      </mat-card-header>-->
+      <mat-list>
+        <h4>Chaines de la solution</h4>
+        <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
+      </mat-list>
+<!--      <mat-card-content>-->
+<!--        Chaines de la solution-->
+<!--      </mat-card-content>-->
+<!--      <mat-card-content style="margin-left: 10px; color: #fa9a9a;">-->
+<!--        Aucune chaine générée-->
+<!--      </mat-card-content>-->
+    </mat-card>
+    <mat-expansion-panel *ngIf="selectedInstance.solution.chains.length" class="solution-info">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Chaines de la solution
@@ -90,7 +110,7 @@
         </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="solution-info">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Cycles de la solution
@@ -172,7 +192,7 @@
         </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="selectedInstance">
+    <mat-expansion-panel class="solution-info" *ngIf="selectedInstance">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Les Pairs/Altruists non-utilisés

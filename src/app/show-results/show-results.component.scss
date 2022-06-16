@@ -9,9 +9,6 @@
   border-radius: 50%;
   border:2px solid;
 
-
-
-
   line-height: 0;
   position: relative;
 }
@@ -44,3 +41,34 @@ mat-expansion-panel-header{
 mat-list-item{
   padding: 2%;
 }
+
+#solution {
+  width: 100%;
+}
+
+.solution-info {
+  background-color: grey;
+  margin-top: 10px;
+}
+
+//.pan-chain {
+//  border-radius: 4px;
+//  margin: 10px;
+//}
+//
+//.pan-cycle {
+//  border-radius: 4px;
+//  margin: 10px;
+//}
+//
+//.pan-not-use {
+//}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 4px;
+  //margin: 10px;
+}
+
+//.mat-accordion .mat-expansion-panel-spacing:first-child {
+//  margin: 10px;
+//}
