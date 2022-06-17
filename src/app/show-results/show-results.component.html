@@ -1,223 +1,207 @@
-<!--<div style="border:1px solid green; height: 1000px">-->
-<!--  <span style="font-size: 50px">Kidney Swap</span>-->
-<!--</div>-->
-<!--<span style="font-size: 50px;">Kidney Swap</span>-->
 <p>
   <mat-toolbar>
     <span>Kidney swap</span>
   </mat-toolbar>
 </p>
 <div style="display: flex; flex-direction: row;">
-
-<mat-card>
+  <mat-card>
     <mat-form-field appearance="fill">
-        <select matNativeControl (change)="changeInstance($event)" >
-          <option>Choisissez une instance</option>
-          <option *ngFor="let item of jsonResults.results ; let i=index" [value]="i">
-            {{item.instance.name}}
-          </option>
-        </select>
-      </mat-form-field>
-      <mat-list *ngIf="selectedInstance" style="width: max-content">
-        <h4 class="section-title-bold" style="margin-bottom: 15px;">Propriétés de l'instance</h4>
-        <mat-list-item>Nom de l'instance : &nbsp;<span class="instance-infos">{{selectedInstance.instance.name}}</span></mat-list-item>
-        <mat-list-item>Nombre de Paires : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.nbPairs}}</span></mat-list-item>
-        <mat-list-item>Nombre d'Altruists : &nbsp;<span class="instance-infos">{{selectedInstance.instance.altruists.length}}</span></mat-list-item>
-        <mat-list-item>Taille maximale des cycles : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeCycle}}</span></mat-list-item>
-        <mat-list-item>Taille maximale des chaines : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeChain}}</span></mat-list-item>
-      </mat-list>
-</mat-card>
-
-<mat-card id="solution" style="width: 100%; overflow-x: auto" *ngIf="selectedInstance">
-  <mat-card style="background-color: grey; margin-top: 10px; margin-bottom: 10px">
-    <mat-list>
-      <h4 class="section-title-bold">Solution de l'instance</h4>
-      <mat-list-item>Algorithme utilisé : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.name}}</span></mat-list-item>
-      <mat-list-item>Gain médical : &nbsp; <span class="solution-infos">{{selectedInstance.solution.gainMedTotal}}</span></mat-list-item>
-      <mat-list-item>Nombre de cycles : &nbsp;<span class="solution-infos">{{selectedInstance.solution.cycles.length}}</span></mat-list-item>
-      <mat-list-item>Nombre de chaines : &nbsp;<span class="solution-infos">{{selectedInstance.solution.chains.length}}</span></mat-list-item>
-      <mat-list-item>Temps d'exécution : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.executionTime}}ms</span></mat-list-item>
-      <mat-list-item>Pourcentage des pairs/altruists inutilisés : &nbsp;<span class="solution-infos">{{getPourcentage()}}%</span></mat-list-item>
+      <select matNativeControl (change)="changeInstance($event)" >
+        <option>Choisissez une instance</option>
+        <option *ngFor="let item of jsonResults.results ; let i=index" [value]="i">
+          {{item.instance.name}}
+        </option>
+      </select>
+    </mat-form-field>
+    <mat-list *ngIf="selectedInstance" style="width: max-content">
+      <h4 class="section-title-bold" style="margin-bottom: 15px;">Propriétés de l'instance</h4>
+      <mat-list-item>Nom de l'instance : &nbsp;<span class="instance-infos">{{selectedInstance.instance.name}}</span></mat-list-item>
+      <mat-list-item>Nombre de Paires : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.nbPairs}}</span></mat-list-item>
+      <mat-list-item>Nombre d'Altruists : &nbsp;<span class="instance-infos">{{selectedInstance.instance.altruists.length}}</span></mat-list-item>
+      <mat-list-item>Taille maximale des cycles : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeCycle}}</span></mat-list-item>
+      <mat-list-item>Taille maximale des chaines : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeChain}}</span></mat-list-item>
     </mat-list>
   </mat-card>
-  <mat-accordion class="example-headers-align" multi>
 
-    <mat-card *ngIf="!selectedInstance.solution.chains.length" class="solution-info-card">
+  <mat-card id="solution" style="width: 100%; overflow-x: auto" *ngIf="selectedInstance">
+    <mat-card style="background-color: grey; margin-top: 10px; margin-bottom: 10px">
       <mat-list>
-        <h4 class="section-title-bold">Chaines de la solution</h4>
-        <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
+        <h4 class="section-title-bold">Solution de l'instance</h4>
+        <mat-list-item>Algorithme utilisé : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.name}}</span></mat-list-item>
+        <mat-list-item>Gain médical : &nbsp; <span class="solution-infos">{{selectedInstance.solution.gainMedTotal}}</span></mat-list-item>
+        <mat-list-item>Nombre de cycles : &nbsp;<span class="solution-infos">{{selectedInstance.solution.cycles.length}}</span></mat-list-item>
+        <mat-list-item>Nombre de chaines : &nbsp;<span class="solution-infos">{{selectedInstance.solution.chains.length}}</span></mat-list-item>
+        <mat-list-item>Temps d'exécution : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.executionTime}}ms</span></mat-list-item>
+        <mat-list-item>Pourcentage des pairs/altruists inutilisés : &nbsp;<span class="solution-infos">{{getPourcentage()}}%</span></mat-list-item>
       </mat-list>
     </mat-card>
-    <mat-expansion-panel *ngIf="selectedInstance.solution.chains.length" class="solution-info">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="section-title-bold">
-          Chaines de la solution
-        </mat-panel-title>
-        <!--<mat-panel-description>
-            Nombre de chaines : {{selectedInstance.solution.chains.length}}
-        </mat-panel-description>-->
-      </mat-expansion-panel-header>
+    <mat-accordion class="example-headers-align" multi>
 
-      <div *ngFor="let chain of selectedInstance.solution.chains;" style="display: flex;padding: 10px;" >
-        <div>
-          <p style="padding-top: 12px; width: max-content">Gain Médical : {{chain.gainMedSequence}}</p>
-        </div>
+      <mat-card *ngIf="!selectedInstance.solution.chains.length" class="solution-info-card">
+        <mat-list>
+          <h4 class="section-title-bold">Chaines de la solution</h4>
+          <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-expansion-panel *ngIf="selectedInstance.solution.chains.length" class="solution-info">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="section-title-bold">
+            Chaines de la solution
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-        <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
-          <div *ngFor="let sequence of chain.sequence; let i=index" >
-
-            <div *ngIf="i<chain.sequence.length-1" style="position:relative;top: 18px; left: 53px;width:30px;">
-              {{sequence.coutVersleSuivant}}
-            </div>
-
-            <div style="display: flex;flex-direction: row">
-              <div class="res-circle" style="border:1px solid;"
-                   [style.marginTop.px]="(i==chain.sequence.length-1) ? 19 : 0"
-                   [style.backgroundColor]="sequence.isAltruist ? '#ff9f40' : '#7eb0ff'"
-                   [style.borderColor]="sequence.isAltruist ? '#ff7f00' : '#0047AB'">
-                <div class="circle-txt">{{sequence.id}}</div>
-              </div>
-              <div *ngIf="i<chain.sequence.length-1" style="display: flex;flex-direction: row">
-                <svg xmlns="http://www.w3.org/2000/svg" height="42" width="15"
-                     [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(chain.sequence))?'green':
-                                        (sequence.coutVersleSuivant==getTheWorstLink(chain.sequence))?'red':'black'">
-                  <path d="M0 21.5 H 15V 25 H 0 L 0 20.5" fill="currentColor"></path>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="39" width="34" style="margin-top:3.5px;"
-                     [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(chain.sequence))?'green':
-                                        (sequence.coutVersleSuivant==getTheWorstLink(chain.sequence))?'red':'black'">
-                  <path d="M23.375 30.458 20.875 27.917 27.208 21.625H0V18.125H27.208L20.875 11.792L23.333 9.292L33.917 19.875Z" fill="currentColor"/>
-                  <!--d="M27.375 37.458 24.875 32.917 22.208 28.625H0V25.125H27.208L20.875 11.792L23.333 9.292L43.917 26.875Z"-->
-                </svg>
-              </div>
-            </div>
+        <div *ngFor="let chain of selectedInstance.solution.chains;" style="display: flex;padding: 10px;" >
+          <div>
+            <p style="padding-top: 12px; width: max-content">Gain Médical : {{chain.gainMedSequence}}</p>
           </div>
-        </div>
-      </div>
-    </mat-expansion-panel>
 
-    <mat-card *ngIf="!selectedInstance.solution.cycles.length" class="solution-info-card">
-      <mat-list>
-        <h4 class="section-title-bold">Cycles de la solution</h4>
-        <mat-list-item style="color: #fa9a9a;">Aucun cycle généré</mat-list-item>
-      </mat-list>
-    </mat-card>
-    <mat-expansion-panel *ngIf="selectedInstance.solution.cycles.length" class="solution-info">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="section-title-bold">
-          Cycles de la solution
-        </mat-panel-title>
-        <!--<mat-panel-description>
-          Nombre de cycles : {{selectedInstance.solution.cycles.length}}
-        </mat-panel-description>-->
-      </mat-expansion-panel-header>
-      <div  *ngFor="let cycle of selectedInstance.solution.cycles;" style="display: flex;padding: 10px;">
-        <div style="width:150px;">
-          <p style="padding-top: 12px; width: max-content">Gain Médical : {{cycle.gainMedSequence}}</p>
-        </div>
-        <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
-          <div *ngFor="let sequence of cycle.sequence;let i=index;">
+          <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
+            <div *ngFor="let sequence of chain.sequence; let i=index" >
 
-            <div style="position:relative;"
-                 [style.top.px]="(i<cycle.sequence.length-1)? 18:65"
-                 [style.left.px]="(i<cycle.sequence.length-1)? 50:30">
-              {{sequence.coutVersleSuivant}}
-            </div>
+              <div *ngIf="i<chain.sequence.length-1" style="position:relative;top: 18px; left: 53px;width:30px;">
+                {{sequence.coutVersleSuivant}}
+              </div>
 
-            <div style="display: flex;flex-direction: row;">
-
-              <div style="display: flex;flex-direction: column;">
-                <div class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff">
+              <div style="display: flex;flex-direction: row">
+                <div class="res-circle" style="border:1px solid;"
+                     [style.marginTop.px]="(i==chain.sequence.length-1) ? 19 : 0"
+                     [style.backgroundColor]="sequence.isAltruist ? '#ff9f40' : '#7eb0ff'"
+                     [style.borderColor]="sequence.isAltruist ? '#ff7f00' : '#0047AB'">
                   <div class="circle-txt">{{sequence.id}}</div>
                 </div>
-                <svg *ngIf="i==0" xmlns="http://www.w3.org/2000/svg" height="20" width="44"
-                     [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M24 0 H 20.5 V 20 H 0L 24 20  " fill="currentColor"></path>
-                </svg>
-                <svg *ngIf="i==0" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
-                     [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M20.5 0 H  44 V 3.5 H 20.5 L 20.5 20.5  " fill="currentColor"></path>
-                </svg>
-
-                <svg *ngIf="i<cycle.sequence.length-1 && i>0" style="margin-top:20px;" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
-                     [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M0 0 H 50V 3.5 H 0 L 0 0  " fill="currentColor"></path>
-                </svg>
-
-                <svg *ngIf="i==cycle.sequence.length-1" xmlns="http://www.w3.org/2000/svg" height="20" width="44"
-                     [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M24 0 H 20.5 V 20 H 0L 24 20  " fill="currentColor"></path>
-                </svg>
-                <svg *ngIf="i==cycle.sequence.length-1" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
-                     [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M0 0 H  24 V 3.5 H 0 L 0 0" fill="currentColor"></path>
-                </svg>
-
-              </div>
-
-              <div *ngIf="i<cycle.sequence.length-1" style="display: flex;flex-direction: column">
-                <div style="display: flex;flex-direction: row">
+                <div *ngIf="i<chain.sequence.length-1" style="display: flex;flex-direction: row">
                   <svg xmlns="http://www.w3.org/2000/svg" height="42" width="15"
-                       [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                       [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(chain.sequence))?'green':
+                                        (sequence.coutVersleSuivant==getTheWorstLink(chain.sequence))?'red':'black'">
                     <path d="M0 21.5 H 15V 25 H 0 L 0 20.5" fill="currentColor"></path>
                   </svg>
                   <svg xmlns="http://www.w3.org/2000/svg" height="39" width="34" style="margin-top:3.5px;"
-                       [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                       [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(chain.sequence))?'green':
+                                        (sequence.coutVersleSuivant==getTheWorstLink(chain.sequence))?'red':'black'">
                     <path d="M23.375 30.458 20.875 27.917 27.208 21.625H0V18.125H27.208L20.875 11.792L23.333 9.292L33.917 19.875Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <svg style="margin-top:21.5px;" xmlns="http://www.w3.org/2000/svg" height="10" width="49"
-                     [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
-                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
-                  <path d="M0 0 H 59V 3.5 H 0 L 0 0 " fill="currentColor"/>
-                </svg>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </mat-expansion-panel>
+      </mat-expansion-panel>
 
-    <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" class="solution-info-card">
-      <mat-list>
-        <h4 class="section-title-bold">Les Pairs/Altruists non-utilisés</h4>
-        <mat-list-item style="color: #9afaa7;">Tous les pairs et altruistes on été utilisés</mat-list-item>
-      </mat-list>
-    </mat-card>
-    <mat-expansion-panel class="solution-info" *ngIf="selectedInstance && !((selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0))">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="section-title-bold">
-          Les Pairs/Altruists non-utilisés
-        </mat-panel-title>
-        <!--<mat-panel-description>
-            Pourcentage des pairs/altruists inutilisés {{getPourcentage()}}%
-        </mat-panel-description>-->
-      </mat-expansion-panel-header>
-      <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding: 10px;">
-        <div *ngFor="let altruists of selectedInstance.instance.altruists;let i=index">
-          <div
-            [style.display]="(checkIsInSolution(altruists.id)) ? 'block': 'none' "
-            class="res-circle" style="border:1px solid #ff7f00;background-color: #ff9f40;margin: 5px">
-            <div class="circle-txt">{{altruists.id}}</div>
+      <mat-card *ngIf="!selectedInstance.solution.cycles.length" class="solution-info-card">
+        <mat-list>
+          <h4 class="section-title-bold">Cycles de la solution</h4>
+          <mat-list-item style="color: #fa9a9a;">Aucun cycle généré</mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-expansion-panel *ngIf="selectedInstance.solution.cycles.length" class="solution-info">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="section-title-bold">
+            Cycles de la solution
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div  *ngFor="let cycle of selectedInstance.solution.cycles;" style="display: flex;padding: 10px;">
+          <div style="width:150px;">
+            <p style="padding-top: 12px; width: max-content">Gain Médical : {{cycle.gainMedSequence}}</p>
+          </div>
+          <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
+            <div *ngFor="let sequence of cycle.sequence;let i=index;">
+
+              <div style="position:relative;"
+                   [style.top.px]="(i<cycle.sequence.length-1)? 18:65"
+                   [style.left.px]="(i<cycle.sequence.length-1)? 50:30">
+                {{sequence.coutVersleSuivant}}
+              </div>
+
+              <div style="display: flex;flex-direction: row;">
+
+                <div style="display: flex;flex-direction: column;">
+                  <div class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff">
+                    <div class="circle-txt">{{sequence.id}}</div>
+                  </div>
+                  <svg *ngIf="i==0" xmlns="http://www.w3.org/2000/svg" height="20" width="44"
+                       [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M24 0 H 20.5 V 20 H 0L 24 20  " fill="currentColor"></path>
+                  </svg>
+                  <svg *ngIf="i==0" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
+                       [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M20.5 0 H  44 V 3.5 H 20.5 L 20.5 20.5  " fill="currentColor"></path>
+                  </svg>
+
+                  <svg *ngIf="i<cycle.sequence.length-1 && i>0" style="margin-top:20px;" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
+                       [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M0 0 H 50V 3.5 H 0 L 0 0  " fill="currentColor"></path>
+                  </svg>
+
+                  <svg *ngIf="i==cycle.sequence.length-1" xmlns="http://www.w3.org/2000/svg" height="20" width="44"
+                       [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M24 0 H 20.5 V 20 H 0L 24 20  " fill="currentColor"></path>
+                  </svg>
+                  <svg *ngIf="i==cycle.sequence.length-1" xmlns="http://www.w3.org/2000/svg" height="10" width="44"
+                       [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M0 0 H  24 V 3.5 H 0 L 0 0" fill="currentColor"></path>
+                  </svg>
+
+                </div>
+
+                <div *ngIf="i<cycle.sequence.length-1" style="display: flex;flex-direction: column">
+                  <div style="display: flex;flex-direction: row">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="42" width="15"
+                         [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                      <path d="M0 21.5 H 15V 25 H 0 L 0 20.5" fill="currentColor"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="39" width="34" style="margin-top:3.5px;"
+                         [attr.color]="(sequence.coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (sequence.coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                      <path d="M23.375 30.458 20.875 27.917 27.208 21.625H0V18.125H27.208L20.875 11.792L23.333 9.292L33.917 19.875Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <svg style="margin-top:21.5px;" xmlns="http://www.w3.org/2000/svg" height="10" width="49"
+                       [attr.color]="(cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheBestLink(cycle.sequence))?'green':
+                                        (cycle.sequence[cycle.sequence.length-1].coutVersleSuivant==getTheWorstLink(cycle.sequence))?'red':'black'">
+                    <path d="M0 0 H 59V 3.5 H 0 L 0 0 " fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div *ngFor="let pairs of selectedInstance.instance.pairs;let i=index">
-          <div
-            [style.display]="(checkIsInSolution(pairs.id)) ? 'block': 'none' "
-            class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff;margin: 5px">
-            <div class="circle-txt">{{pairs.id}}</div>
+      </mat-expansion-panel>
+
+      <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" class="solution-info-card">
+        <mat-list>
+          <h4 class="section-title-bold">Les Pairs/Altruists non-utilisés</h4>
+          <mat-list-item style="color: #9afaa7;">Tous les pairs et altruistes on été utilisés</mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-expansion-panel class="solution-info" *ngIf="selectedInstance && !((selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0))">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="section-title-bold">
+            Les Pairs/Altruists non-utilisés
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding: 10px;">
+          <div *ngFor="let altruists of selectedInstance.instance.altruists;let i=index">
+            <div
+              [style.display]="(checkIsInSolution(altruists.id)) ? 'block': 'none' "
+              class="res-circle" style="border:1px solid #ff7f00;background-color: #ff9f40;margin: 5px">
+              <div class="circle-txt">{{altruists.id}}</div>
+            </div>
+          </div>
+          <div *ngFor="let pairs of selectedInstance.instance.pairs;let i=index">
+            <div
+              [style.display]="(checkIsInSolution(pairs.id)) ? 'block': 'none' "
+              class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff;margin: 5px">
+              <div class="circle-txt">{{pairs.id}}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</mat-card>
-
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
 </div>
