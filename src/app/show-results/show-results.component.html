@@ -1,9 +1,9 @@
 <div style="border:1px solid green;">
-
+  <h1>Kidney Swap</h1>
 </div>
 <div style="display: flex;flex-direction: row;">
 
-<mat-card style="width:22%;border: 1px solid red;">
+<mat-card style="border: 1px solid red; width: max-content">
 
     <mat-form-field appearance="fill">
         <select matNativeControl (change)="changeInstance($event)" >
@@ -43,7 +43,7 @@
   </mat-card>
   <mat-accordion class="example-headers-align" multi>
 
-    <mat-card *ngIf="!selectedInstance.solution.chains.length" style="background-color: dimgrey">
+    <mat-card *ngIf="!selectedInstance.solution.chains.length" class="solution-info-card">
       <mat-list>
         <h4>Chaines de la solution</h4>
         <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
@@ -97,7 +97,7 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-card *ngIf="!selectedInstance.solution.cycles.length" style="background-color: dimgrey">
+    <mat-card *ngIf="!selectedInstance.solution.cycles.length" class="solution-info-card">
       <mat-list>
         <h4>Cycles de la solution</h4>
         <mat-list-item style="color: #fa9a9a;">Aucun cycle généré</mat-list-item>
@@ -186,7 +186,7 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" style="background-color: dimgrey">
+    <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" class="solution-info-card">
       <mat-list>
         <h4>Les Pairs/Altruists non-utilisés</h4>
         <mat-list-item style="color: #9afaa7;">Tous les pairs et altruistes on été utilisés</mat-list-item>
