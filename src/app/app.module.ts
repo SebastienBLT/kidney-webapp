@@ -12,24 +12,26 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
     AppComponent,
     ShowResultsComponent
   ],
-  imports: [
-    BrowserModule,
-    NoopAnimationsModule,
-    MatCardModule,
-    MatListModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatSidenavModule
-  ],
+    imports: [
+        BrowserModule,
+        NoopAnimationsModule,
+        MatCardModule,
+        MatListModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatSidenavModule,
+        MatToolbarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

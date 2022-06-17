@@ -1,10 +1,15 @@
-<div style="border:1px solid green;">
-  <h1>Kidney Swap</h1>
-</div>
-<div style="display: flex;flex-direction: row;">
+<!--<div style="border:1px solid green; height: 1000px">-->
+<!--  <span style="font-size: 50px">Kidney Swap</span>-->
+<!--</div>-->
+<!--<span style="font-size: 50px;">Kidney Swap</span>-->
+<p>
+  <mat-toolbar>
+    <span>Kidney swap</span>
+  </mat-toolbar>
+</p>
+<div style="display: flex; flex-direction: row;">
 
-<mat-card style="border: 1px solid red; width: max-content">
-
+<mat-card>
     <mat-form-field appearance="fill">
         <select matNativeControl (change)="changeInstance($event)" >
           <option>Choisissez une instance</option>
@@ -13,8 +18,7 @@
           </option>
         </select>
       </mat-form-field>
-
-      <mat-list *ngIf="selectedInstance" style="margin-top: 50px;">
+      <mat-list *ngIf="selectedInstance" style="width: max-content">
         <h4 style="margin-bottom: 15px">Propriétés de l'instance</h4>
         <mat-list-item>Nom de l'instance : {{selectedInstance.instance.name}}</mat-list-item>
         <mat-list-item>Nombre de Paires : {{selectedInstance.instance.properties.nbPairs}}</mat-list-item>
@@ -22,14 +26,9 @@
         <mat-list-item>Taille maximale des cycles : {{selectedInstance.instance.properties.maxSizeCycle}}</mat-list-item>
         <mat-list-item>Taille maximale des chaines : {{selectedInstance.instance.properties.maxSizeChain}}</mat-list-item>
       </mat-list>
-
-
-
 </mat-card>
 
-<mat-card id="solution" style="border:1px solid blue;" *ngIf="selectedInstance">
-
-
+<mat-card id="solution" style="width: 100%; overflow-x: auto" *ngIf="selectedInstance">
   <mat-card style="background-color: grey; margin-top: 10px; margin-bottom: 10px">
     <mat-list>
       <h4>Solution de l'instance</h4>
@@ -60,11 +59,11 @@
       </mat-expansion-panel-header>
 
       <div *ngFor="let chain of selectedInstance.solution.chains;" style="display: flex;padding: 10px;" >
-        <div style="width:150px;">
-          <p style="padding-top: 12px;">Gain Médical {{chain.gainMedSequence}}</p>
+        <div>
+          <p style="padding-top: 12px; width: max-content">Gain Médical : {{chain.gainMedSequence}}</p>
         </div>
 
-        <div style="display: flex;flex-direction:row;margin-left: 20px">
+        <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
           <div *ngFor="let sequence of chain.sequence; let i=index" >
 
             <div *ngIf="i<chain.sequence.length-1" style="position:relative;top: 18px; left: 53px;width:30px;">
@@ -74,7 +73,7 @@
             <div style="display: flex;flex-direction: row">
               <div class="res-circle" style="border:1px solid;"
                    [style.marginTop.px]="(i==chain.sequence.length-1) ? 19 : 0"
-                   [style.backgroundColor]="sequence.isAltruist ? '#ff9f40' : '#bcd6ff'"
+                   [style.backgroundColor]="sequence.isAltruist ? '#ff9f40' : '#7eb0ff'"
                    [style.borderColor]="sequence.isAltruist ? '#ff7f00' : '#0047AB'">
                 <div class="circle-txt">{{sequence.id}}</div>
               </div>
@@ -114,10 +113,10 @@
       </mat-expansion-panel-header>
       <div  *ngFor="let cycle of selectedInstance.solution.cycles;" style="display: flex;padding: 10px;">
         <div style="width:150px;">
-          <p style="padding-top: 12px;">Gain Médical {{cycle.gainMedSequence}}</p>
+          <p style="padding-top: 12px; width: max-content">Gain Médical : {{cycle.gainMedSequence}}</p>
         </div>
-        <div style="display: flex;flex-direction:row;margin-left: 20px;">
-          <div *ngFor="let sequence of cycle.sequence;let i=index;" style="" >
+        <div style="display: flex;flex-direction:row;margin-left: 20px; overflow-x: auto; width: 100%">
+          <div *ngFor="let sequence of cycle.sequence;let i=index;">
 
             <div style="position:relative;"
                  [style.top.px]="(i<cycle.sequence.length-1)? 18:65"
@@ -128,7 +127,7 @@
             <div style="display: flex;flex-direction: row;">
 
               <div style="display: flex;flex-direction: column;">
-                <div class="res-circle" style="border:1px solid #0047AB;background-color: #bcd6ff">
+                <div class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff">
                   <div class="circle-txt">{{sequence.id}}</div>
                 </div>
                 <svg *ngIf="i==0" xmlns="http://www.w3.org/2000/svg" height="20" width="44"
@@ -212,7 +211,7 @@
         <div *ngFor="let pairs of selectedInstance.instance.pairs;let i=index">
           <div
             [style.display]="(checkIsInSolution(pairs.id)) ? 'block': 'none' "
-            class="res-circle" style="border:1px solid #0047AB;background-color: #bcd6ff;margin: 5px">
+            class="res-circle" style="border:1px solid #0047AB;background-color: #7eb0ff;margin: 5px">
             <div class="circle-txt">{{pairs.id}}</div>
           </div>
         </div>
@@ -222,194 +221,3 @@
 </mat-card>
 
 </div>
-
-<!--
-
-<mat-card style="height: 40px">
-  <mat-card-header>
-    <h1>BINKS</h1>
-
-  </mat-card-header>
-</mat-card>
-
-
-
--->
-
-
-
-
-  <!--<div *ngIf="selectedInstance" style="display: flex">
-
-
-
-    <div *ngFor="let cycle of selectedInstance.solution.cycles;">
-      Chains : {{cycle.gainMedSequence}}
-      <div *ngFor="let sequence of cycle.sequence; let i=index">
-        <div style="display: flex;flex-direction: row;">
-          <div class="res-circle" style="border:1px solid red;">
-            <div class="circle-txt">{{sequence.id}}</div>
-          </div>
-        </div>
-        <div style="display: flex;flex-direction: row;">
-          <svg *ngIf="i<cycle.sequence.length-1" style="margin-left:2px" xmlns="http://www.w3.org/2000/svg" height="44" width="48">
-            <path d="M24 44 10 30 12.1 27.9 22.5 38.3V0H25.5V38.3L35.9 27.9L38 30Z"/>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-
-    <div  *ngFor="let cycle of selectedInstance.solution.chains;">
-
-      Cycle : {{cycle.gainMedSequence}}
-
-      <div style="border:1px solid red;display: flex;flex-wrap: wrap;flex-direction: row" >
-
-        <div style="border: 1px solid green">
-
-          <div *ngFor="let sequence of cycle.sequence;let i=index" >
-
-            <div *ngIf="i==0" >
-
-
-
-              <div style="display: flex;flex-direction: row;">
-                <div class="res-circle" style="border:1px solid red;">
-                  <div class="circle-txt">{{sequence.id}}</div>
-                </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" height="44" width="44">
-                  <path d="M0 25 H 44 V 22 H 0 L 0 20  "/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="50" width="10">
-                  <path d="M0 22 H 3 V 50 H 0 L 0 50 "/>
-                </svg>
-              </div>
-
-              <div style="display: flex;flex-direction: row">
-                <svg style="margin-left:2px" xmlns="http://www.w3.org/2000/svg" height="44" width="48">
-                  <path d="M24 44 10 30 12.1 27.9 22.5 38.3V0H25.5V38.3L35.9 27.9L38 30Z"/>
-                </svg>
-                <svg style="margin-left:44px;" xmlns="http://www.w3.org/2000/svg" height="44" width="10">
-                  <path d="M0 0 H 3 V 44 H 0 L 0 44 "/>
-                </svg>
-              </div>
-            </div>
-
-
-
-            <div *ngIf="i<cycle.sequence.length-1 && i>0">
-              <div style="display: flex;flex-direction: row">
-                <div  class="res-circle" style="border:1px solid red;">
-                  <div class="circle-txt">{{sequence.id}}</div>
-                </div>
-                <svg style="margin-left:44px;" xmlns="http://www.w3.org/2000/svg" height="50" width="10">
-                  <path d="M0 0 H 3 V 50 H 0 L 0 50 "/>
-                </svg>
-              </div>
-
-              <div style="display: flex;flex-direction: row">
-                <svg style="margin-left:2px;" xmlns="http://www.w3.org/2000/svg" height="44" width="48">
-                  <path d="M24 44 10 30 12.1 27.9 22.5 38.3V0H25.5V38.3L35.9 27.9L38 30Z"/>
-                </svg>
-                <svg style="margin-left:44px;" xmlns="http://www.w3.org/2000/svg" height="44" width="10">
-                  <path d="M0 0 H 3 V 44 H 0 L 0 44 "/>
-                </svg>
-              </div>
-            </div>
-
-            <div *ngIf="i==cycle.sequence.length-1" >
-
-              <div style="display: flex;flex-direction: row">
-                <div class="res-circle" style="border:1px solid red;">
-                  <div class="circle-txt">{{sequence.id}}</div>
-                </div>
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" height="44" width="44">
-                  <path d="M0 25 H 44 V 22 H 0 L 0 20  "/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="50" width="10">
-                  <path d="M0 0 H 3 V 25 H 0 L 0 25 "/>
-                </svg>
-
-
-              </div>
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-          </div>
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  </div>-->
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<mat-card *ngIf="selectedInstance">
-
-  <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding: 10px;">
-    <div *ngFor="let altruists of selectedInstance.instance.altruists;let i=index">
-      <div
-        [style.display]="(checkIsInSolution(altruists.id)) ? 'block': 'none' "
-        class="res-circle" style="border:1px solid #ff7f00;background-color: #ff9f40;margin: 5px">
-        <div class="circle-txt">{{altruists.id}}</div>
-      </div>
-
-
-    </div>
-    <div *ngFor="let pairs of selectedInstance.instance.pairs;let i=index">
-      <div
-        [style.display]="(checkIsInSolution(pairs.id)) ? 'block': 'none' "
-        class="res-circle" style="border:1px solid #0047AB;background-color: #bcd6ff;margin: 5px">
-        <div class="circle-txt">{{pairs.id}}</div>
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-
-</mat-card>
--->
-<!--
-<div class="res-circle" style="border:1px solid red;">
-  <div class="circle-txt">test</div>
-</div>
-<svg xmlns="http://www.w3.org/2000/svg" height="44" width="48"><path d="M24 44 10 30 12.1 27.9 22.5 38.3V0H25.5V38.3L35.9 27.9L38 30Z"/></svg>
-<div class="res-circle" style="border:1px solid red;">
-  <div class="circle-txt">test</div>
-</div>-->
-
-
-
-
