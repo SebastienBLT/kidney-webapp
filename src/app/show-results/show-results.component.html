@@ -19,38 +19,38 @@
         </select>
       </mat-form-field>
       <mat-list *ngIf="selectedInstance" style="width: max-content">
-        <h4 style="margin-bottom: 15px">Propriétés de l'instance</h4>
-        <mat-list-item>Nom de l'instance : {{selectedInstance.instance.name}}</mat-list-item>
-        <mat-list-item>Nombre de Paires : {{selectedInstance.instance.properties.nbPairs}}</mat-list-item>
-        <mat-list-item>Nombre d'Altruists : {{selectedInstance.instance.altruists.length}}</mat-list-item>
-        <mat-list-item>Taille maximale des cycles : {{selectedInstance.instance.properties.maxSizeCycle}}</mat-list-item>
-        <mat-list-item>Taille maximale des chaines : {{selectedInstance.instance.properties.maxSizeChain}}</mat-list-item>
+        <h4 class="section-title-bold" style="margin-bottom: 15px;">Propriétés de l'instance</h4>
+        <mat-list-item>Nom de l'instance : &nbsp;<span class="instance-infos">{{selectedInstance.instance.name}}</span></mat-list-item>
+        <mat-list-item>Nombre de Paires : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.nbPairs}}</span></mat-list-item>
+        <mat-list-item>Nombre d'Altruists : &nbsp;<span class="instance-infos">{{selectedInstance.instance.altruists.length}}</span></mat-list-item>
+        <mat-list-item>Taille maximale des cycles : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeCycle}}</span></mat-list-item>
+        <mat-list-item>Taille maximale des chaines : &nbsp;<span class="instance-infos">{{selectedInstance.instance.properties.maxSizeChain}}</span></mat-list-item>
       </mat-list>
 </mat-card>
 
 <mat-card id="solution" style="width: 100%; overflow-x: auto" *ngIf="selectedInstance">
   <mat-card style="background-color: grey; margin-top: 10px; margin-bottom: 10px">
     <mat-list>
-      <h4>Solution de l'instance</h4>
-      <mat-list-item>Algorithme utilisé : {{selectedInstance.algorithm.name}}</mat-list-item>
-      <mat-list-item>Gain médical : {{selectedInstance.solution.gainMedTotal}}</mat-list-item>
-      <mat-list-item>Nombre de cycles : {{selectedInstance.solution.cycles.length}}</mat-list-item>
-      <mat-list-item>Nombre de chaines : {{selectedInstance.solution.chains.length}}</mat-list-item>
-      <mat-list-item>Temps d'exécution : {{selectedInstance.algorithm.executionTime}}ms</mat-list-item>
-      <mat-list-item>Pourcentage des pairs/altruists inutilisés : {{getPourcentage()}}%</mat-list-item>
+      <h4 class="section-title-bold">Solution de l'instance</h4>
+      <mat-list-item>Algorithme utilisé : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.name}}</span></mat-list-item>
+      <mat-list-item>Gain médical : &nbsp; <span class="solution-infos">{{selectedInstance.solution.gainMedTotal}}</span></mat-list-item>
+      <mat-list-item>Nombre de cycles : &nbsp;<span class="solution-infos">{{selectedInstance.solution.cycles.length}}</span></mat-list-item>
+      <mat-list-item>Nombre de chaines : &nbsp;<span class="solution-infos">{{selectedInstance.solution.chains.length}}</span></mat-list-item>
+      <mat-list-item>Temps d'exécution : &nbsp;<span class="solution-infos">{{selectedInstance.algorithm.executionTime}}ms</span></mat-list-item>
+      <mat-list-item>Pourcentage des pairs/altruists inutilisés : &nbsp;<span class="solution-infos">{{getPourcentage()}}%</span></mat-list-item>
     </mat-list>
   </mat-card>
   <mat-accordion class="example-headers-align" multi>
 
     <mat-card *ngIf="!selectedInstance.solution.chains.length" class="solution-info-card">
       <mat-list>
-        <h4>Chaines de la solution</h4>
+        <h4 class="section-title-bold">Chaines de la solution</h4>
         <mat-list-item style="color: #fa9a9a;">Aucune chaine générée</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-expansion-panel *ngIf="selectedInstance.solution.chains.length" class="solution-info">
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title class="section-title-bold">
           Chaines de la solution
         </mat-panel-title>
         <!--<mat-panel-description>
@@ -98,13 +98,13 @@
 
     <mat-card *ngIf="!selectedInstance.solution.cycles.length" class="solution-info-card">
       <mat-list>
-        <h4>Cycles de la solution</h4>
+        <h4 class="section-title-bold">Cycles de la solution</h4>
         <mat-list-item style="color: #fa9a9a;">Aucun cycle généré</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-expansion-panel *ngIf="selectedInstance.solution.cycles.length" class="solution-info">
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title class="section-title-bold">
           Cycles de la solution
         </mat-panel-title>
         <!--<mat-panel-description>
@@ -187,13 +187,13 @@
 
     <mat-card *ngIf="(selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0)" class="solution-info-card">
       <mat-list>
-        <h4>Les Pairs/Altruists non-utilisés</h4>
+        <h4 class="section-title-bold">Les Pairs/Altruists non-utilisés</h4>
         <mat-list-item style="color: #9afaa7;">Tous les pairs et altruistes on été utilisés</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-expansion-panel class="solution-info" *ngIf="selectedInstance && !((selectedInstance.instance.altruists.length == 0) && (selectedInstance.instance.pairs.length == 0))">
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title class="section-title-bold">
           Les Pairs/Altruists non-utilisés
         </mat-panel-title>
         <!--<mat-panel-description>
